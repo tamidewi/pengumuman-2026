@@ -7,78 +7,35 @@
     
     <!-- Script Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0f172a' // Slate 900
-                    }
-                }
-            }
+            theme: { extend: { colors: { darkBg: '#0f172a' } } }
         }
     </script>
 
-    <!-- CSS Khusus Glassmorphism & Animasi -->
     <style>
-        body {
-            background-color: #0f172a;
-            color: white;
-            overflow-x: hidden;
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-        /* Ornamen Cahaya Latar Belakang (Blobs) */
-        .blob {
-            position: absolute;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.6;
-            animation: moveBlob 10s infinite alternate;
-        }
-        @keyframes moveBlob {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(20px, -50px) scale(1.1); }
-        }
-        /* Gaya Kotak Kaca (Glassmorphism) */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        .glass-input {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .glass-input:focus {
-            outline: none;
-            border-color: rgba(96, 165, 250, 0.5); /* Biru menyala */
-            box-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
-        }
-        .text-glow {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        .hidden-el {
-            display: none !important;
-        }
+        body { background-color: #0f172a; color: white; overflow-x: hidden; font-family: ui-sans-serif, system-ui, sans-serif; }
+        .blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.6; animation: moveBlob 10s infinite alternate; }
+        @keyframes moveBlob { from { transform: translate(0, 0) scale(1); } to { transform: translate(20px, -50px) scale(1.1); } }
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+        .glass-input { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+        .glass-input:focus { outline: none; border-color: rgba(96, 165, 250, 0.5); box-shadow: 0 0 15px rgba(96, 165, 250, 0.2); }
+        .hidden-el { display: none !important; }
     </style>
 </head>
 <body class="antialiased min-h-screen relative flex items-center justify-center p-4">
 
-    <!-- Ornamen Background -->
     <div class="blob bg-blue-600 w-64 h-64 rounded-full top-10 left-10"></div>
     <div class="blob bg-purple-600 w-72 h-72 rounded-full bottom-10 right-10" style="animation-delay: -5s"></div>
 
-    <!-- Container Utama Aplikasi -->
+    <!-- UI Aplikasi Utama -->
     <div class="glass-panel rounded-3xl p-8 w-full max-w-md relative z-10 transition-all duration-500">
-        
         <div class="text-center mb-8">
             <img src="https://site.smpn4kedungreja.sch.id/jurnalgcp/wp-content/uploads/2026/02/Logo-Satap.png" alt="Logo Sekolah" class="h-24 w-auto mx-auto mb-4 opacity-95 drop-shadow-lg object-contain" />
-            <h1 class="text-2xl font-bold text-white text-glow tracking-wide">Pengumuman Kelulusan</h1>
-            <p class="text-gray-300 text-sm mt-1">SMP Negeri 4 Satu Atap Kedungreja</p>
+            <h1 class="text-2xl font-bold text-white tracking-wide">Pengumuman Kelulusan</h1>
+			<h1 class="text-2xl font-bold text-white tracking-wide">SMPN 4 SATU ATAP KEDUNGREJA</h1>
             <p class="text-gray-300 text-sm mt-1">Tahun Ajaran 2025/2026</p>
         </div>
 
@@ -105,46 +62,33 @@
             </div>
         </div>
 
-        <!-- Bagian Form Pencarian -->
         <form id="form-pencarian" class="space-y-5 hidden-el">
             <div>
                 <label class="block text-sm font-medium text-gray-300 mb-2">Masukkan NISN</label>
                 <input type="number" id="input-nisn" placeholder="Contoh: 1234567890" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-400 focus:ring-0" required />
             </div>
-            
-            <!-- Pesan Error -->
             <div id="error-message" class="hidden-el bg-red-500/20 border border-red-500/50 text-red-200 text-sm p-3 rounded-lg flex items-center">
-                <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span id="error-text"></span>
             </div>
-
-            <!-- Tombol Submit -->
-            <button type="submit" id="btn-submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] flex justify-center items-center">
+            <button type="submit" id="btn-submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-[0_0_15px_rgba(37,99,235,0.4)] flex justify-center items-center">
                 <span id="btn-text">Cek Status Kelulusan</span>
-                <svg id="btn-loading" class="hidden-el animate-spin -ml-1 mr-3 h-5 w-5 text-white absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
+                <svg id="btn-loading" class="hidden-el animate-spin -ml-1 mr-3 h-5 w-5 text-white absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             </button>
         </form>
 
-        <!-- Bagian Hasil Kelulusan -->
         <div id="hasil-pencarian" class="hidden-el">
             <div class="text-center mb-6">
-                <h2 class="text-lg text-gray-300">Hasil Pencarian untuk NISN</h2>
+                <h2 class="text-lg text-gray-300">Hasil Pencarian NISN</h2>
                 <p id="hasil-nisn" class="text-xl font-mono font-bold text-blue-400 tracking-wider mt-1"></p>
             </div>
 
-            <div class="bg-black/30 rounded-xl p-5 mb-6 border border-white/10">
+            <div class="bg-black/30 rounded-xl p-5 mb-4 border border-white/10">
                 <p class="text-sm text-gray-400 mb-1">Nama Siswa</p>
                 <p id="hasil-nama" class="text-lg font-semibold text-white mb-4"></p>
-                
                 <p class="text-sm text-gray-400 mb-2">Status</p>
-                <div id="hasil-status" class="text-2xl font-black tracking-widest p-3 rounded-lg text-center border">
-                    <!-- Status LULUS / TIDAK LULUS disuntikkan via JS -->
-                </div>
+                <div id="hasil-status" class="text-2xl font-black tracking-widest p-3 rounded-lg text-center border"></div>
             </div>
-
+            
             <div class="bg-white/5 border border-white/10 rounded-xl p-5 mb-6">
                 <div class="flex items-center mb-3">
                     <svg class="w-5 h-5 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
@@ -153,13 +97,17 @@
                 <p id="hasil-pengumuman" class="text-sm text-gray-300 leading-relaxed"></p>
             </div>
 
-            <button type="button" id="btn-kembali" class="w-full bg-transparent border border-gray-500 hover:border-gray-300 text-gray-300 hover:text-white font-medium py-3 rounded-xl transition duration-300">
-                Kembali Pencarian
+            <!-- TOMBOL BUKA/DOWNLOAD FILE SCAN -->
+            <button type="button" id="btn-download" class="hidden-el w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-[0_0_15px_rgba(16,185,129,0.4)] mb-4 flex justify-center items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                <span id="btn-download-text">Lihat Surat Kelulusan Asli</span>
             </button>
+
+            <button type="button" id="btn-kembali" class="w-full bg-transparent border border-gray-500 hover:border-gray-300 text-gray-300 hover:text-white font-medium py-3 rounded-xl transition duration-300">Kembali</button>
         </div>
     </div>
 
-    <!-- Logika JavaScript Murni (Native) -->
+    <!-- LOGIKA JAVASCRIPT -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // ====================================================================
@@ -168,167 +116,137 @@
             // ====================================================================
             const GAS_URL = "https://script.google.com/macros/s/AKfycbzW_kr269CuA-uNF6wkYOErChzHqCXHJDIhhZUogFy9K6aRFkapfm8D3DQJgB7j3yU/exec";
             
-            // Pengambilan Elemen DOM
             const form = document.getElementById('form-pencarian');
             const inputNisn = document.getElementById('input-nisn');
             const btnSubmit = document.getElementById('btn-submit');
             const btnText = document.getElementById('btn-text');
             const btnLoading = document.getElementById('btn-loading');
-            
+            const divForm = document.getElementById('form-pencarian');
+            const divHasil = document.getElementById('hasil-pencarian');
             const errorContainer = document.getElementById('error-message');
             const errorText = document.getElementById('error-text');
             
-            const divForm = document.getElementById('form-pencarian');
-            const divHasil = document.getElementById('hasil-pencarian');
-            
-            const elNisn = document.getElementById('hasil-nisn');
-            const elNama = document.getElementById('hasil-nama');
-            const elStatus = document.getElementById('hasil-status');
-            const elPengumuman = document.getElementById('hasil-pengumuman');
-            
-            const btnKembali = document.getElementById('btn-kembali');
-
-            // Elemen Countdown Timer
-            const countdownContainer = document.getElementById('countdown-container');
-            const cdDays = document.getElementById('cd-days');
-            const cdHours = document.getElementById('cd-hours');
-            const cdMinutes = document.getElementById('cd-minutes');
-            const cdSeconds = document.getElementById('cd-seconds');
+            // Variabel Global Data Siswa
+            let currentSiswaData = null;
 
             // --- LOGIKA COUNTDOWN TIMER ---
-            // Waktu buka: 2 Juni 2026, 14:00 WIB (Zona Waktu Indonesia/Jakarta +07:00)
-            const targetDate = new Date("2026-06-02T14:00:00+07:00").getTime();
+            const countdownContainer = document.getElementById('countdown-container');
+            const targetDate = new Date("2025-06-02T14:00:00+07:00").getTime();
 
             const timerInterval = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
 
                 if (distance <= 0) {
-                    // Waktu sudah tiba: Hentikan timer, sembunyikan kotak timer, tampilkan form
                     clearInterval(timerInterval);
                     countdownContainer.classList.add('hidden-el');
                     divForm.classList.remove('hidden-el');
                 } else {
-                    // Waktu belum tiba: Sembunyikan form, tampilkan kotak timer
                     divForm.classList.add('hidden-el');
                     countdownContainer.classList.remove('hidden-el');
 
-                    // Kalkulasi waktu
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    // Update UI Timer
-                    cdDays.textContent = days.toString().padStart(2, '0');
-                    cdHours.textContent = hours.toString().padStart(2, '0');
-                    cdMinutes.textContent = minutes.toString().padStart(2, '0');
-                    cdSeconds.textContent = seconds.toString().padStart(2, '0');
+                    document.getElementById('cd-days').textContent = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                    document.getElementById('cd-hours').textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                    document.getElementById('cd-minutes').textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    document.getElementById('cd-seconds').textContent = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
                 }
             }, 1000);
 
-            // --- LOGIKA FORM PENCARIAN ---
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const nisn = inputNisn.value.trim();
                 
                 if(nisn === '') {
-                    showError('NISN tidak boleh kosong');
+                    errorText.textContent = 'NISN tidak boleh kosong';
+                    errorContainer.classList.remove('hidden-el');
                     return;
                 }
+                
+                errorContainer.classList.add('hidden-el');
 
-                setLoading(true);
-                hideError();
-
-                // ⚠️ Blok ini hanya untuk simulasi awal jika URL belum diset.
-                // Jika sudah live, blok ini tidak akan dijalankan.
-                if(GAS_URL.includes("REPLACE_WITH_YOUR_ACTUAL_GAS_URL")) {
+                // --- MOCK UP UNTUK TEST (Hapus jika URL asli sudah dimasukkan) ---
+                if(GAS_URL.includes("REPLACE_WITH")) {
+                    btnText.classList.add('hidden-el'); btnLoading.classList.remove('hidden-el');
                     setTimeout(() => {
-                        if(nisn === '1234567890') {
-                            showResult(nisn, { nama: 'Budi Santoso', status: 'LULUS' }, 'Bagi siswa yang dinyatakan LULUS, harap hadir ke sekolah pada tanggal 10 Juni 2026 untuk melakukan cap tiga jari. Gunakan seragam rapi.');
-                        } else {
-                            showError('Simulasi: Data tidak ditemukan. Coba NISN 1234567890');
-                        }
-                        setLoading(false);
+                        currentSiswaData = { 
+                            nisn: nisn, 
+                            nama: 'Budi Santoso', 
+                            status: 'LULUS', 
+                            link_surat: 'https://drive.google.com/file/d/contoh_link_file/view' // Link contoh
+                        };
+                        showResult(currentSiswaData, 'Pengumuman contoh untuk simulasi.');
+                        btnText.classList.remove('hidden-el'); btnLoading.classList.add('hidden-el');
                     }, 1000);
                     return;
                 }
 
-                // Kirim request ke Backend (Google Apps Script)
+                btnText.classList.add('hidden-el'); btnLoading.classList.remove('hidden-el');
+                btnSubmit.disabled = true;
+
                 try {
                     const response = await fetch(GAS_URL, {
                         method: 'POST',
                         body: JSON.stringify({ nisn: nisn }),
                         headers: { 'Content-Type': 'text/plain;charset=utf-8' }
                     });
-
                     const data = await response.json();
                     
                     if (data.success) {
-                        showResult(nisn, data.data.siswa, data.data.pengumuman);
+                        currentSiswaData = { 
+                            nisn: nisn, 
+                            nama: data.data.siswa.nama, 
+                            status: data.data.siswa.status,
+                            link_surat: data.data.siswa.link_surat 
+                        };
+                        showResult(currentSiswaData, data.data.pengumuman);
                     } else {
-                        showError(data.message || 'Data tidak ditemukan. Pastikan NISN benar.');
+                        errorText.textContent = data.message || 'Data tidak ditemukan.';
+                        errorContainer.classList.remove('hidden-el');
                     }
                 } catch (err) {
-                    console.error(err);
-                    showError('Terjadi kesalahan koneksi ke server. Silakan coba lagi.');
+                    errorText.textContent = 'Terjadi kesalahan server.';
+                    errorContainer.classList.remove('hidden-el');
                 } finally {
-                    setLoading(false);
-                }
-            });
-
-            // Tombol Kembali
-            btnKembali.addEventListener('click', function() {
-                divHasil.classList.add('hidden-el');
-                divForm.classList.remove('hidden-el');
-                inputNisn.value = '';
-                inputNisn.focus();
-            });
-
-            // --- FUNGSI HELPER UI ---
-            function setLoading(isLoading) {
-                if(isLoading) {
-                    btnText.classList.add('hidden-el');
-                    btnLoading.classList.remove('hidden-el');
-                    btnSubmit.disabled = true;
-                    btnSubmit.classList.add('opacity-70', 'cursor-not-allowed');
-                } else {
-                    btnText.classList.remove('hidden-el');
-                    btnLoading.classList.add('hidden-el');
+                    btnText.classList.remove('hidden-el'); btnLoading.classList.add('hidden-el');
                     btnSubmit.disabled = false;
-                    btnSubmit.classList.remove('opacity-70', 'cursor-not-allowed');
                 }
-            }
+            });
 
-            function showError(msg) {
-                errorText.textContent = msg;
-                errorContainer.classList.remove('hidden-el');
-            }
-
-            function hideError() {
-                errorContainer.classList.add('hidden-el');
-            }
-
-            function showResult(nisn, siswa, pengumuman) {
+            function showResult(data, pengumuman) {
                 divForm.classList.add('hidden-el');
                 divHasil.classList.remove('hidden-el');
                 
-                elNisn.textContent = nisn;
-                elNama.textContent = siswa.nama;
-                elPengumuman.textContent = pengumuman;
+                document.getElementById('hasil-nisn').textContent = data.nisn;
+                document.getElementById('hasil-nama').textContent = data.nama;
+                document.getElementById('hasil-pengumuman').textContent = pengumuman;
                 
-                elStatus.textContent = siswa.status;
+                const elStatus = document.getElementById('hasil-status');
+                elStatus.textContent = data.status;
+                elStatus.className = "text-2xl font-black tracking-widest p-3 rounded-lg text-center border " + 
+                    (data.status === 'LULUS' ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)]" : "bg-red-500/20 border-red-500/50 text-red-400 shadow-[0_0_20px_rgba(239,68,68,0.2)]");
                 
-                // Reset CSS class untuk status
-                elStatus.className = "text-2xl font-black tracking-widest p-3 rounded-lg text-center border";
-                
-                // Dinamis warna berdasarkan LULUS / TIDAK LULUS
-                if(siswa.status === 'LULUS') {
-                    elStatus.classList.add('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-400', 'shadow-[0_0_20px_rgba(16,185,129,0.2)]');
+                // Menampilkan tombol lihat scan surat JIKA link tersedia di Google Sheets
+                const btnDownload = document.getElementById('btn-download');
+                if(data.link_surat && data.link_surat.trim() !== '') {
+                    btnDownload.classList.remove('hidden-el');
+                    
+                    const newBtnDownload = btnDownload.cloneNode(true);
+                    btnDownload.parentNode.replaceChild(newBtnDownload, btnDownload);
+                    
+                    newBtnDownload.addEventListener('click', function() {
+                        window.open(data.link_surat, '_blank');
+                    });
                 } else {
-                    elStatus.classList.add('bg-red-500/20', 'border-red-500/50', 'text-red-400', 'shadow-[0_0_20px_rgba(239,68,68,0.2)]');
+                    btnDownload.classList.add('hidden-el');
                 }
             }
+
+            document.getElementById('btn-kembali').addEventListener('click', function() {
+                divHasil.classList.add('hidden-el');
+                divForm.classList.remove('hidden-el');
+                inputNisn.value = '';
+                currentSiswaData = null;
+            });
         });
     </script>
 </body>
